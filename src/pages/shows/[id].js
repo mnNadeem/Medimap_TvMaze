@@ -1,4 +1,5 @@
 import { ShowPage } from "../../components/ShowPage";
+import Head from "next/head";
 
 export async function getStaticPaths() {
   return {
@@ -17,6 +18,17 @@ export async function getStaticProps(context) {
   };
 }
 
-export default function Post({ show }) {
-  return <ShowPage show={show} />;
+export default function Show({ show }) {
+
+  const { name, summary} = show;
+
+  return (
+    <>
+      <Head>
+        <title>{name}</title>
+        <meta name="description" content={summary} />
+      </Head>
+      <ShowPage show={show} />
+    </>
+  );
 }

@@ -30,67 +30,61 @@ export const ShowPage = ({
   }`;
 
   return (
-    <>
-      <Head>
-        <title>{name}</title>
-        <meta name="description" content={summary} />
-      </Head>
-      <div className={styles.main}>
-        <div className={styles.left}>
-          <img
-            className={styles.image}
-            src={image?.medium || image?.original}
-            alt={name}
+    <div className={styles.main}>
+      <div className={styles.left}>
+        <img
+          className={styles.image}
+          src={image?.medium || image?.original}
+          alt={name}
+        />
+        {summary && (
+          <div
+            className={styles.description}
+            dangerouslySetInnerHTML={{ __html: summary }}
           />
-          {summary && (
-            <div
-              className={styles.description}
-              dangerouslySetInnerHTML={{ __html: summary }}
-            />
-          )}
-        </div>
-        <div className={styles.right}>
-          <h3>Show Info</h3>
-          {isSchedule && (
-            <p>
-              <b>Schedule: </b>
-              {scheduleString}
-            </p>
-          )}
-          <p>
-            <b>Status: </b>
-            {status}
-          </p>
-          <p>
-            <b>Show Type: </b>
-            {type}
-          </p>
-          {isGenres && (
-            <p>
-              <b>Genres: </b>
-              {genres.join(" | ")}
-            </p>
-          )}
-          {officialSite && (
-            <p>
-              <b>Official cite: </b>
-              <Link
-                href={`${officialSite}`}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                {officialSite}
-              </Link>
-            </p>
-          )}
-          {rating.average && (
-            <div>
-              <Rating value={rating.average} />
-              {` ${rating.average} (${weight} votes)`}
-            </div>
-          )}
-        </div>
+        )}
       </div>
-    </>
+      <div className={styles.right}>
+        <h3>Show Info</h3>
+        {isSchedule && (
+          <p>
+            <b>Schedule: </b>
+            {scheduleString}
+          </p>
+        )}
+        <p>
+          <b>Status: </b>
+          {status}
+        </p>
+        <p>
+          <b>Show Type: </b>
+          {type}
+        </p>
+        {isGenres && (
+          <p>
+            <b>Genres: </b>
+            {genres.join(" | ")}
+          </p>
+        )}
+        {officialSite && (
+          <p>
+            <b>Official cite: </b>
+            <Link
+              href={`${officialSite}`}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              {officialSite}
+            </Link>
+          </p>
+        )}
+        {rating.average && (
+          <div>
+            <Rating value={rating.average} />
+            {` ${rating.average} (${weight} votes)`}
+          </div>
+        )}
+      </div>
+    </div>
   );
 };
