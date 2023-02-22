@@ -19,12 +19,15 @@ export const ShowPage = ({
   },
 }) => {
   const isSchedule = schedule?.days?.length > 0;
+  const isGenres = genres?.length > 0;
   const daysString =
     schedule?.days?.length === 1
       ? `${schedule.days[0]}s`
       : schedule?.days?.join(", ");
   const [hours, minutes] = schedule?.time.split(":");
-  const scheduleString = `${daysString} at ${hours}:00 (${minutes} min)`;
+  const scheduleString = `${daysString} ${
+    hours && minutes ? `at ${hours}:00 (${minutes} min)` : ""
+  }`;
 
   return (
     <>
@@ -62,7 +65,7 @@ export const ShowPage = ({
             <b>Show Type: </b>
             {type}
           </p>
-          {genres?.length && (
+          {isGenres && (
             <p>
               <b>Genres: </b>
               {genres.join(" | ")}
