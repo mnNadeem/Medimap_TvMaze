@@ -1,8 +1,58 @@
 import React from "react";
-import styles from "../styles/show.module.css";
+import styled from "@emotion/styled";
 import Link from "next/link";
 import Rating from "./Rating";
-import Head from "next/head";
+
+const Conatiner = styled.div`
+  display: flex;
+  margin-top: 100px;
+  @media (max-width: 700px) {
+    margin-top: 50px;
+    flex-direction: column;
+  }
+`;
+
+const LeftContainer = styled.div`
+  display: flex;
+  @media (max-width: 700px) {
+    flex-direction: column;
+    align-items: center;
+  }
+`;
+
+const RightContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 500px;
+  @media (max-width: 700px) {
+    margin-top: 20px;
+    width: 300px;
+  }
+`;
+
+const StyledImage = styled.img`
+  width: 300px;
+  height: 380px;
+  margin-top: 18px;
+  margin-right: 32px;
+  @media (max-width: 700px) {
+    margin-right: 0px;
+  }
+`;
+
+const Description = styled.div`
+  width: 500px;
+  height: 300px;
+  margin-right: 38px;
+  @media (max-width: 700px) {
+    width: 300px;
+    height: 99px;
+    margin-left: 0px;
+    margin-right: 0px;
+    overflow-y: scroll;
+    margin-top: 20px;
+  }
+`;
 
 export const ShowPage = ({
   show: {
@@ -30,21 +80,14 @@ export const ShowPage = ({
   }`;
 
   return (
-    <div className={styles.main}>
-      <div className={styles.left}>
-        <img
-          className={styles.image}
-          src={image?.medium || image?.original}
-          alt={name}
-        />
+    <Conatiner>
+      <LeftContainer>
+        <StyledImage src={image?.medium || image?.original} alt={name} />
         {summary && (
-          <div
-            className={styles.description}
-            dangerouslySetInnerHTML={{ __html: summary }}
-          />
+          <Description dangerouslySetInnerHTML={{ __html: summary }} />
         )}
-      </div>
-      <div className={styles.right}>
+      </LeftContainer>
+      <RightContainer>
         <h3>Show Info</h3>
         {isSchedule && (
           <p>
@@ -84,7 +127,7 @@ export const ShowPage = ({
             {` ${rating.average} (${weight} votes)`}
           </div>
         )}
-      </div>
-    </div>
+      </RightContainer>
+    </Conatiner>
   );
 };

@@ -1,7 +1,25 @@
 import React, { useContext } from "react";
 import { Box, Typography, Grid } from "@mui/material";
-import { SearchResult } from "./SearchResult";
+import styled from "@emotion/styled";
 import { SearchContext } from "./SearchContext";
+import { SearchResult } from "./SearchResult";
+
+const ResultsBox = styled(Box)`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  align-self: stretch;
+`;
+
+const ResultsHeader = styled(Typography)`
+  font-size: 1.875rem;
+  font-weight: bold;
+`;
+
+const ResultsGrid = styled(Grid)`
+  margin-top: 12px;
+`;
 
 export const SearchResults = () => {
   const { searchResults } = useContext(SearchContext);
@@ -9,19 +27,11 @@ export const SearchResults = () => {
   return (
     <>
       {searchResults?.length ? (
-        <Box
-          sx={{
-            display: "flex",
-            flexDirection: "column",
-            justifyContent: "center",
-            alignItems: "center",
-            alignSelf: "stretch",
-          }}
-        >
-          <Typography variant="h4" component="h2">
+        <ResultsBox>
+          <ResultsHeader variant="h4" component="h2">
             Search Results
-          </Typography>
-          <Grid container spacing={2} style={{ marginTop: "12px" }}>
+          </ResultsHeader>
+          <ResultsGrid container spacing={2}>
             {searchResults.map(({ show }) => {
               const { id } = show;
               return (
@@ -30,8 +40,8 @@ export const SearchResults = () => {
                 </Grid>
               );
             })}
-          </Grid>
-        </Box>
+          </ResultsGrid>
+        </ResultsBox>
       ) : null}
     </>
   );

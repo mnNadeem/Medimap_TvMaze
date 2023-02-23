@@ -19,9 +19,7 @@ export async function getStaticProps(context) {
 }
 
 export default function Show({ show }) {
-
-  const { name, summary} = show;
-
+  const { name, summary } = show;
   return (
     <>
       <Head>

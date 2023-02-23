@@ -1,6 +1,15 @@
 import React, { useContext, useCallback, useState } from "react";
+import styled from "@emotion/styled";
 import { Box, TextField, Button } from "@mui/material";
 import { SearchContext } from "./SearchContext";
+
+const StyledBox = styled(Box)`
+  display: flex;
+  flex-direction: row;
+  width: 480px;
+  max-width: 100%;
+  margin-top: 24px;
+`;
 
 export const SearchBar = () => {
   const { handleSearch } = useContext(SearchContext);
@@ -20,15 +29,7 @@ export const SearchBar = () => {
   );
 
   return (
-    <Box
-      style={{
-        display: "flex",
-        flexDirection: "row",
-        width: "480px",
-        maxWidth: "100%",
-        marginTop: "24px",
-      }}
-    >
+    <StyledBox>
       <TextField
         id="query"
         variant="outlined"
@@ -40,6 +41,6 @@ export const SearchBar = () => {
       <Button variant="contained" color="primary" onClick={handleSearchClicked}>
         Search
       </Button>
-    </Box>
+    </StyledBox>
   );
 };
